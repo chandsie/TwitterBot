@@ -33,7 +33,7 @@ def main():
         if dtime.hour == 14:
             if dtime.minute == 0:
                 api.update_status(MUSIC_LONG)
-            elif dtime.minute <= 44:
+            elif dtime.minute <= 44 and dtime.minute % 9 == 0:
                 api.update_status(MUSIC)
             elif dtime.minute == 45:
                 api.update_status(MUSIC_LONG)
@@ -43,7 +43,7 @@ def main():
         if dtime.hour == 12:
             if dtime.minute == 0:
                 api.update_status(MUSIC_LONG)
-            elif dtime.minute <= 14:
+            elif dtime.minute <= 14 and dtime.minute % 5 == 0:
                 api.update_status(MUSIC)
             elif dtime.minute == 15:
                 api.update_status(MUSIC_LONG)
@@ -51,7 +51,7 @@ def main():
         elif dtime.hour == 18:
             if dtime.minute == 0:
                 api.update_status(MUSIC_LONG)
-            elif dtime.minute <= 9:
+            elif dtime.minute <= 9 and dtime.minute % 5 == 0:
                 api.update_status(MUSIC)
             elif dtime.minute == 10:
                 api.update_status(MUSIC_LONG)
@@ -60,7 +60,7 @@ def main():
         if dtime.hour == 7:
             if dtime.minute == 50:
                 api.update_status(MUSIC_LONG)
-            elif 50 < dtime.minute <= 59:
+            elif 50 < dtime.minute <= 59 and dtime.minute % 5 == 0:
                 api.update_status(MUSIC)
         elif dtime.hour == 8 and dtime.minute == 0:
             api.update_status(MUSIC_LONG)
@@ -68,7 +68,7 @@ def main():
         elif dtime.hour == 12:
             if dtime.minute == 0:
                 api.update_status(MUSIC_LONG)
-            elif dtime.minute <= 9:
+            elif dtime.minute <= 9 and dtime.minute % 5 == 0:
                 api.update_status(MUSIC)
             elif dtime.minute == 10:
                 api.update_status(MUSIC_LONG)
@@ -76,7 +76,7 @@ def main():
         elif dtime.hour == 18:
             if dtime.minute == 0:
                 api.update_status(MUSIC_LONG)
-            elif dtime.minute <= 9:
+            elif dtime.minute <= 9 and dtime.minute % 5 == 0:
                 api.update_status(MUSIC)
             elif dtime.minute == 10:
                 api.update_status(MUSIC_LONG)
