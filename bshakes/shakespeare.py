@@ -2,10 +2,11 @@
 import json, tweepy, random, time, os
 MAX_ITERS = 100
 MAX_CHARS = 140
-consumer_key = os.environ['CONSUMER_KEY']
-consumer_secret = os.environ['CONSUMER_SECRET']
-access_token = os.environ['ACCESS_TOKEN']
-access_token_secret = os.environ['ACCESS_TOKEN_SECRET']
+CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
+consumer_key = 'YOU_CONSUMER_KEY_HERE'
+consumer_secret = 'YOUR_CONSUMER_SECRET_HERE'
+access_token = 'YOUR_ACCESS_TOKEN_HERE'
+access_token_secret = 'YOUR_ACCESS_TOKEN_SECRET_HERE'
 api = None
 
 log_file = open('bshakes-' + time.strftime("%y-%m-%d") + '.log', 'a')
@@ -17,7 +18,7 @@ def log(mesg):
 
 log("Starting new invocation.")
 log("Loading lexicon.")
-table = json.loads(open('/home/pi/bshakes/table.json', 'r').read())
+table = json.loads(open(CURRENT_DIR + '/table.json', 'r').read())
 
 def construct_sent(word):
     log("\tCreating sentence.")
@@ -82,7 +83,7 @@ def main():
     api = tweepy.API(auth)
 
     log("Restoring context data.")
-    ld = json.loads(open('/home/pi/bshakes/loop_data.json', 'r').read())
+    ld = json.loads(open(CURRENT_DIR + '/loop_data.json', 'r').read())
     last_tweet_time = ld[0]
     last_reply = ld[1]
 
@@ -90,7 +91,7 @@ def main():
         log("About to send out regular tweet.")
         shake_it_up()
         last_tweet_time = time.time()
-        open('/home/pi/bshakes/loop_data.json', 'w').write(json.dumps([last_tweet_time, last_reply]))
+        open(CURRENT_DIR + '/loop_data.json', 'w').write(json.dumps([last_tweet_time, last_reply]))
     try:
         log("Getting mention list.")
         mentions = api.mentions_timeline(since_id = last_reply)
@@ -100,7 +101,7 @@ def main():
             log("\tNone found.")
         for mention in mentions:
             last_reply = mention.id
-            open('/home/pi/bshakes/loop_data.json', 'w').write(json.dumps([last_tweet_time, last_reply]))
+            open(CURRENT_DIR + '/loop_data.json', 'w').write(json.dumps([last_tweet_time, last_reply]))
             user_handle = u'@' + mention.user.screen_name
             log("\tReplying to direct tweet from " + user_handle)
             shake_back(mention.text , user_handle, last_reply)

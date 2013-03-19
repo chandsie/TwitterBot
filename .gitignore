@@ -36,3 +36,6 @@ nosetests.xml
 
 # Environment Variable Definitions
 .env
+
+# Virtualenv
+venv
